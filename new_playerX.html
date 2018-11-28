@@ -1,0 +1,665 @@
+<!doctype HTML>
+
+<html>
+	<head>
+		<style type="text/css">
+			body {
+				background-image:url(back.jpg);
+				background-repeat: no-repeat;
+			}
+			
+			#canv {
+				border:10px solid #f9b031;
+				position:absolute;
+				top: 200px;
+				left: 200px;
+			}
+			
+			#restart{
+				position: absolute;
+				top: 70px;
+				left: 340px;
+			}
+			
+			#starta {
+				position: absolute;
+				top: 50px;
+				left: 50px;
+			}
+			
+			#startx {
+				position: absolute;
+				top: 70px;
+				left: 550px;
+			}
+			
+			#starto {
+				position: absolute;
+				top: 70px;
+				left: 680px;
+			}
+
+			#aa {
+				position: absolute;
+				top: 230px;
+				left: 230px;
+			}
+			#ab {
+				position: absolute;
+				top: 230px;
+				left: 340px;
+			}
+			#ac {
+				position: absolute;
+				top: 230px;
+				left: 450px;
+			}
+			#ba {
+				position: absolute;
+				top: 340px;
+				left: 230px;
+			}
+			#bb {
+				position: absolute;
+				top: 340px;
+				left: 340px;
+			}
+			#bc {
+				position: absolute;
+				top: 340px;
+				left: 450px;
+			}
+			#ca {
+				position: absolute;
+				top: 450px;
+				left: 230px;
+			}
+			#cb {
+				position: absolute;
+				top: 450px;
+				left: 340px;
+			}
+			#cc {
+				position: absolute;
+				top: 450px;
+				left: 450px;
+			}
+		</style>
+		<script type="text/javascript">
+			var arr = [[0,0,0],[0,0,0],[0,0,0]];
+			var nonrec=0;
+			
+			
+			function start(){
+				var random = Math.floor((Math.random())*9)+1;
+				var i = random%3;
+				var j = Math.floor((random-1)/3);
+				arr[i][j] = 1;
+				var elementa = document.getElementById("starta");
+				elementa.parentNode.removeChild(elementa);
+				var elementb = document.getElementById("startx");
+				elementb.parentNode.removeChild(elementb);
+				var elementc = document.getElementById("starto");
+				elementc.parentNode.removeChild(elementc);
+				var passname= "i";
+				
+				switch(i){
+					case 0:
+						passname=passname+"a";
+						break;
+					case 1:
+						passname=passname+"b";
+						break;
+					case 2:
+						passname=passname+"c";
+						break;
+					default:
+						alert("In switch i= " + i);
+				}
+				
+				switch(j){
+					case 0:
+						passname=passname+"a";
+						break;
+					case 1:
+						passname=passname+"b";
+						break;
+					case 2:
+						passname=passname+"c";
+						break;
+					default:
+						alert("In switch j= " + j);
+				}
+				
+				funx(passname);
+			}
+			
+			window.onload = function vanish(){
+				var elementa = document.getElementById("starta");
+				elementa.parentNode.removeChild(elementa);
+				var elementb = document.getElementById("startx");
+				elementb.parentNode.removeChild(elementb);
+				var elementc = document.getElementById("starto");
+				elementc.parentNode.removeChild(elementc);
+			}
+			
+			function funo(nam){
+				document.getElementById(nam).removeAttribute("onclick");
+				var image = document.getElementById(nam);
+				image.src = "xtictac.png";
+				nonrec=0;
+				var capi;
+				var capj;
+				
+				switch(nam[1]){
+					case 'a':
+						capi=0;
+						break;
+					case 'b':
+						capi=1;
+						break;
+					case 'c':
+						capi=2;
+						break;
+					default:
+						alert("In switch funo capi= " + capi);
+				}
+				
+				switch(nam[2]){
+					case 'a':
+						capj=0;
+						break;
+					case 'b':
+						capj=1;
+						break;
+					case 'c':
+						capj=2;
+						break;
+					default:
+						alert("In switch funo capj= " + capj);
+				}
+				
+				arr[capi][capj]=2;
+				
+				mainf();
+				
+			}
+			
+			function funx(nam){
+				document.getElementById(nam).removeAttribute("onclick");
+				var image = document.getElementById(nam);
+				image.src = "otictac.jpg";
+			}
+			
+			function mainf(){
+				
+				var capi=0;
+				var capj=0;
+				var winct=0;
+				var i=0;
+				var j=0;
+				var losct=0;
+				var passname= "i";
+				
+				//WIN TEST WIN
+					/*horz*/
+				for(capi=0;capi<3;capi++){
+					winct=0;
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=1;
+							
+							for(i=0;i<3;i++){
+								winct=0;
+								for(j=0;j<3;j++){
+									if(arr[i][j]==1){
+										winct++;
+									}
+								}
+								
+								if(winct==3){
+									switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+									return;
+								}
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				
+					/*vert*/
+				
+				for(capi=0;capi<3;capi++){
+					losct=0;
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=1;
+							
+							for(i=0;i<3;i++){
+								losct=0;
+								for(j=0;j<3;j++){
+									if(arr[j][i]==1){
+										losct++;
+									}
+								}
+								
+								if(losct==3){
+									switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+									return;
+								}
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				
+					/*cross \*/
+				
+				for(capi=0;capi<3;capi++){
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=1;
+							
+							if((arr[0][0]==arr[1][1])&&(arr[1][1]==arr[2][2])&&(arr[0][0]==1)){
+								switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+								return;
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				
+					/*cross/*/
+				
+				
+				for(capi=0;capi<3;capi++){
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=1;
+							
+							if((arr[0][2]==arr[1][1])&&(arr[1][1]==arr[2][0])&&(arr[1][1]==1)){
+								switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+								return;
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				//LOSE TEST LOSE
+				
+				for(capi=0;capi<3;capi++){
+					winct=0;
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=2;
+							
+							for(i=0;i<3;i++){
+								winct=0;
+								for(j=0;j<3;j++){
+									if(arr[i][j]==2){
+										winct++;
+									}
+								}
+								
+								if(winct==3){
+									arr[capi][capj]=1;
+									switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+									return;
+								}
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				
+					/*vert*/
+				
+				for(capi=0;capi<3;capi++){
+					losct=0;
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=2;
+							
+							for(i=0;i<3;i++){
+								losct=0;
+								for(j=0;j<3;j++){
+									if(arr[j][i]==2){
+										losct++;
+									}
+								}
+								
+								if(losct==3){
+									arr[capi][capj]=1;
+									switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+									return;
+								}
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				
+					/*cross \*/
+				
+				for(capi=0;capi<3;capi++){
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=2;
+							
+							if((arr[0][0]==arr[1][1])&&(arr[1][1]==arr[2][2])&&(arr[1][1]==2)){
+								arr[capi][capj]=1;
+								switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+								return;
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				
+					/*cross/*/
+				
+				
+				for(capi=0;capi<3;capi++){
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=2;
+							
+							if((arr[0][2]==arr[1][1])&&(arr[1][1]==arr[2][0])&&(arr[1][1]==2)){
+								arr[capi][capj]=1;
+								switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+								return;
+							}
+							
+							arr[capi][capj]=0;
+						}
+					}
+				}
+				
+				//NO WIN NO LOSE
+				
+				for(capi=0;capi<3;capi++){
+					for(capj=0;capj<3;capj++){
+						if(arr[capi][capj]==0){
+							arr[capi][capj]=1;
+							switch(capi){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch i= " + i);
+									}
+									
+									switch(capj){
+										case 0:
+											passname=passname+"a";
+											break;
+										case 1:
+											passname=passname+"b";
+											break;
+										case 2:
+											passname=passname+"c";
+											break;
+										default:
+											alert("In switch j= " + j);
+									}
+									funx(passname);
+							return;
+						}
+					}
+				}
+				
+			}
+			
+			
+		</script>
+	</head>
+	
+	<body>
+		
+		<div id="canv"> <img src="canvas.jpg" /> </div>
+		<div id="starta"> <img src="select.png"> </div>
+		<div id="starto" onclick="start()"> <img src="otictac.jpg"> </div>
+		<div id="startx" onclick="vanish()"> <img src="xtictac.png"> </div>
+		<a href="file:///C:/Users/Prajwal%20Raut/Desktop/Tic-Tac/GAME%20START.html"><div id="restart" > <img src="restart_orig.jpg"> </div></a>
+		<div id="aa"> <img src="blank.jpg"  onclick="funo('iaa')" id="iaa" /> </div>
+		<div id="ab"> <img src="blank.jpg"  onclick="funo('iab')" id="iab" /> </div>
+		<div id="ac"> <img src="blank.jpg"  onclick="funo('iac')" id="iac" /> </div>
+		<div id="ba"> <img src="blank.jpg"  onclick="funo('iba')" id="iba" /> </div>
+		<div id="bb"> <img src="blank.jpg"  onclick="funo('ibb')" id="ibb" /> </div>
+		<div id="bc"> <img src="blank.jpg"  onclick="funo('ibc')" id="ibc" /> </div>
+		<div id="ca"> <img src="blank.jpg"  onclick="funo('ica')" id="ica" /> </div>
+		<div id="cb"> <img src="blank.jpg"  onclick="funo('icb')" id="icb" /> </div>
+		<div id="cc"> <img src="blank.jpg"  onclick="funo('icc')" id="icc" /> </div>
+		
+	</body>
+	
+</html>

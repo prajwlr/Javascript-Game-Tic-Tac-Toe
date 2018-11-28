@@ -1,0 +1,60 @@
+	
+	body {
+		background-image:url(back.jpg);
+		background-repeat: no-repeat;
+	}
+	
+	#canv {
+		border:10px solid #f9b031;
+		position:absolute;
+		top: 200px;
+		left: 200px;
+	}
+
+
+	#aa {
+		position: absolute;
+		top: 230px;
+		left: 230px;
+	}
+	#ab {
+		position: absolute;
+		top: 230px;
+		left: 340px;
+	}
+	#ac {
+		position: absolute;
+		top: 230px;
+		left: 450px;
+	}
+	#ba {
+		position: absolute;
+		top: 340px;
+		left: 230px;
+	}
+	#bb {
+		position: absolute;
+		top: 340px;
+		left: 340px;
+	}
+	#bc {
+		position: absolute;
+		top: 340px;
+		left: 450px;
+	}
+	#ca {
+		position: absolute;
+		top: 450px;
+		left: 230px;
+	}
+	#cb {
+		position: absolute;
+		top: 450px;
+		left: 340px;
+	}
+	#cc {
+		position: absolute;
+		top: 450px;
+		left: 450px;
+	}
+	
